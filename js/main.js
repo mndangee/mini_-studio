@@ -6,9 +6,3 @@ var swiper = new Swiper('.swiper-container', {
         prevEl: ".swiper-button-prev"
       },  
 });
-
-// $(document).ready(function() {
-//     $('.mask tr').addClass('list_pic');
-//     $('.mask tr').addClass('swiper-slide');
-// });
-  
