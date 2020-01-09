@@ -5,6 +5,6 @@
 *  Recommend using chrome 
 
 ```
-[Link to site URL (youtube)](https://www.youtube.com/watch?v=yBFPo2V7Ngs&feature=youtu.be/)
+[Link to site URL](https://www.youtube.com/watch?v=yBFPo2V7Ngs&feature=youtu.be/)
 
 ```
