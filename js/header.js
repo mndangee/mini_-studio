@@ -4,7 +4,6 @@ $(".btn").on("click",function(){
 });
 $("body").not("#wrapSideMenu").on("click",function(){
     $("#wrapSideMenu").removeClass("open");
-    // return false;
 });
 $(".input_login").on("click",function(){
     $("#wrapSideMenu").removeClass("open");
