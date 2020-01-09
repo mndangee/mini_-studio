@@ -1,4 +1,4 @@
-# mini_-studio
+# mini_studio
 
 1. Download all folders
 2. Site access via 127.0.0.1 (ex. 127.0.0.1/Downloaded folder name/html/index.html)
