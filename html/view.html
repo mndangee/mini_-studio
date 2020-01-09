@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>미니 사진관</title>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500|Noto+Serif+KR:400,500 | Lato:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/swiper.css">
+    <link rel="stylesheet" href="../css/view.css">
+    <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
+    <script src="../js/swiper.min.js"></script>
+    <script src="../js/TweenMax.min.js"></script>
+</head>
+<body>
+    <?php include '../include/header.php';?>
+    <?php
+        $connect = mysqli_connect('127.0.0.1', 'project', 'bitnami', 'project');
+        $post_id = $_GET['post_id'];
+        session_start();
+        $query = "select * from Post where post_id =$post_id";
+        $result = $connect->query($query);
+        $rows = mysqli_fetch_assoc($result);
+
+        $query3 = "select * from Comment where post_id =$post_id";
+        $result3 = $connect->query($query3);
+        $rows3 = mysqli_fetch_assoc($result3);
+        $total2 = mysqli_num_rows($result3);
+
+        $query7 = "select * from LikePost where post_id =$post_id";
+        $result7 = $connect->query($query7);
+        $rows7 = mysqli_fetch_assoc($result7);
+    ?>
+    <?php
+        $connect = mysqli_connect('127.0.0.1', 'project', 'bitnami', 'project') or die ("connect fail");
+        $query5 = "select * from Post order by post_id desc";
+        $result5 = $connect->query($query5);
+        $rows5 = mysqli_fetch_assoc($result5);
+
+        $query_Limit = "SELECT * FROM Post ORDER BY post_id DESC LIMIT 1";
+        $Limit_result = $connect->query($query_Limit);
+        $L_rows = mysqli_fetch_assoc($Limit_result);
+    ?>
+    <?php
+        $connect = mysqli_connect('127.0.0.1', 'project', 'bitnami', 'project') or die ("connect fail");
+        $userid = $rows['userid'];
+        $query4 ="select nickname, address from UserInfo where userid = '$userid'";
+        $result4 = $connect->query($query4);
+        $rows4 = mysqli_fetch_assoc($result4);
+    ?>
+    <?php
+        $connect = mysqli_connect('127.0.0.1', 'project', 'bitnami', 'project') or die ("connect fail");
+        $query2 = "select * from Comment order by post_id desc";
+        $result2 = $connect->query($query2);
+        $total = mysqli_num_rows($result2);
+    ?>
+    <?php
+        $connect = mysqli_connect('127.0.0.1', 'project', 'bitnami', 'project') or die ("connect fail");
+        $userid = $rows3['userid'];
+        $query6 ="select nickname, address from UserInfo where userid = '$userid'";
+        $result6 = $connect->query($query6);
+        $rows6 = mysqli_fetch_assoc($result6);
+    ?>
+    <?php
+        $connect = mysqli_connect('127.0.0.1', 'project', 'bitnami', 'project') or die ("connect fail");
+        $reply ="select * from TComment order by comment_id asc";
+        $r_result = $connect->query($reply);
+        $total3 = mysqli_num_rows($r_result);
+    ?>
+        <!-- <div class="overlay"></div> -->
+<?php
+        if($_SESSION['userid'] == $rows['userid']) {
+?>
+            <div class="wrap_action_article">
+                <div class="more_action">
+                    <a href="edit.html?post_id=<?php echo $post_id?>" class="edit_post">
+                        <span class="ico_edit img_ico text_hide">편집</span>
+                    </a>
+                    <form action="../php/post_delete.php?post_id=<?php echo $post_id?>" method="POST" name="delete">
+                        <button class="btn_delete_post">
+                            <span class="ico_delete img_ico text_hide">삭제</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+<?php
+        }
+        else {
+            if(isset($_SESSION['userid'])) {
+?>
+                <div class="wrap_action_article">
+                    <div class="more_action">
+<?php                   if($_SESSION['userid'] == $rows7['userid']) {
+?>
+                            <form action="../php/like_delete.php?post_id=<?php echo $post_id?>" method="POST">
+                                <button class="btn_like_post">
+                                    <span class="ico_like_click img_ico text_hide">좋아요</span>
+                                </button>
+                            </form>
+<?php
+                        }
+                        else{
+?>
+                        <form action="../php/post_like.php?post_id=<?php echo $post_id?>" method="POST">
+                            <button id="btn_like_post" class="btn_like_post">
+                                <span class="ico_like img_ico text_hide">좋아요</span>
+                            </button>
+                        </form>
+<?php                   }
+?>
+                    </div>
+                </div>
+<?php       }
+        }
+?>
+
+    <main id="main" class="article_con">
+        <div class="wrap_article">
+            <div class="wrap_cover wrap_title">
+                <div class="cover_text">
+                    <div class="cover_image"></div>
+                    <div class="cover_direction_left">
+                        <h1 class="title"><?php echo $rows['title']?></h1>
+                        <p class="subtitle"><?php echo $rows['subtitle']?></p>
+                    </div>
+                    <div id="wrapArticleInfo">
+                        <span class="f_l ico_by">by</span>
+                        <span class="f_l text_author">
+                            <a href="m_studio.html?address=<?php echo $rows4['address']?>"><?php echo $rows4['nickname']?></a>
+                        </span>
+                        <span class="f_l ico_dot_middle"></span>
+                        <sapn class="f_l date"><?php echo $rows['date']?></sapn>
+                    </div>
+                </div>
+            </div>
+            <div class="wrap_body_frame">
+                <div class="wrap_body">
+                    <pre class="wrap_content">
+                        <?php echo $rows['content']?> 
+                    </pre>
+                </div>
+                <div class="article_body_bottm"></div>
+            </div>
+        </div>
+        <!-- 다음글 이전글 -->
+        <div class="wrap_content_btn">
+<?php
+            if($post_id > 1){
+                $prevposid = $post_id - 1;
+?>
+                <a href="view.html?post_id=<?php echo $prevposid?>" class="prev page_btn"><span class="btn_icon text_hide">이전글</span></a>
+<?php       }
+?>
+<?php
+            if($post_id != $L_rows['post_id'] ){
+                $nextposid = $post_id + 1;
+?>
+                <a href="view.html?post_id=<?php echo $nextposid?>" class="next page_btn"><span class="btn_icon text_hide">다음글</span></a>
+<?php       }
+?>
+        </div>
+        <!-- 댓글 버튼 -->
+        <div class="inner_body_info">
+            <span class="wrap_comment_btn">
+                <button class="btn_comment" onclick="BtnClick()">
+                    <span class="ico_comment img_article"></span>
+                    <span>댓글</span>
+                    <span class="num_comment"><?php echo $total2?></span>
+                </button>
+            </span>
+        </div>
+        <div class="article_bottom"></div>
+        <!-- 댓글 -->
+        <div id="Comment" class="user_comment" style="display: block;">
+            <div class="comment_head">
+                <strong class="tit_comment">
+                    댓글
+                    <span class="txt_num"><?php echo $total2?></span>
+                </strong>
+            </div>
+            <div id="comment_content" class="comment_content">
+                <table>
+                    <tbody>
+<?php
+                        while($rows2 = mysqli_fetch_assoc($result2)) {
+                            if($rows2['post_id'] == $_GET['post_id']){
+                                if(total%2==0) {
+?>
+                                    <tr class="wrap_comment_empty"></tr>
+<?php                           }
+                                else {
+?>
+                                    <tr class="list_comment">
+<?php                           }
+?>                                      <td class="item" comment_id="<?php echo $rows2['comment_id']?>">
+                                            <div class="comment">
+                                                <div class="cont_info">
+                                                    <div class="info_append">
+                                                        <strong class="tit_nickname">
+                                                            <a href="m_studio.html?address=<?php echo $rows6['address']?>" class="link_user"><?php echo $rows6['nickname']?></a>
+                                                        </strong>
+                                                        <span class="ico_dot"></span>
+                                                        <span class="txt_time"><?php echo $rows2['date']?></span>
+                                                    </div>
+                                                    <pre><p class="desc_comment"><?php echo $rows2['comment']?></p></pre>
+                                                </div>
+<?php                                           if(isset($_SESSION['userid'])) {
+?>
+                                                    <div class="thread_btn">
+                                                        <span class="wrap_comment_btn">
+                                                            <button class="Tread_comment" reply_post="<?php echo $_GET['post_id']?>" reply_id="<?php echo $rows2['comment_id']?>" name="reply_reply">
+                                                                <span>답글</span>
+                                                            </button>
+                                                        </span>
+                                                    </div>
+<?php                                           }
+?>
+                                            </div>
+                                        </td>
+                                    </tr>
+<?php 
+                                $total--;
+                        }
+                    }                        
+?>
+                    </tbody>
+                </table>
+            </div>
+            <!-- 답글 -->
+            <div id="comment_reply" class="comment_reply comment_content">
+                <table>
+                    <tbody>
+<?php
+                        while($r_rows = mysqli_fetch_assoc($r_result)) {
+                            if($r_rows['post_id'] == $_GET['post_id']) {
+                                if(total3%2==0) {
+?>
+                                    <tr class="wrap_reply_empty"></tr>
+<?php                           }
+                                else { 
+?>
+                                    <tr class="reply_comment" reply_comment_id="<?php echo $r_rows['comment_id']?>">
+<?php                           }
+?>                                      <td class="item">
+                                            <div class="comment">
+                                                <div class="cont_info">
+                                                    <div class="info_append">
+                                                        <strong class="tit_nickname">
+                                                            <a href="m_studio.html?address=<?php echo $rows6['address']?>" class="link_user"><?php echo $rows6['nickname']?></a>
+                                                        </strong>
+                                                        <span class="ico_dot"></span>
+                                                        <span class="txt_time"><?php echo $r_rows['date']?></span> <br>
+                                                        <span class="txt_reply"><?php echo $r_rows['comment_id']?>번째 댓글에 대한 답글</span><br>
+                                                    </div>
+                                                    <pre><p class="desc_comment"><?php echo $r_rows['comment']?></p></pre>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+<?php 
+                                $total3--;
+                        }                        
+                    }
+?>
+                    </tbody>
+                </table>
+            </div>
+<?php
+            if(isset($_SESSION['userid'])) {
+?>
+                <div id="wrap_comment_write" class="wrap_comment_write">
+                    <form action="../php/comment.php?post_id=<?php echo $post_id?>" class="comment_write" method="POST">
+                        <fieldset>
+                            <div class="box_area c_textarea">
+                                <textarea id="comment" class="tf_area" name="comment" maxlength="1000" placeholder="댓글은 큰 힘이 됩니다."></textarea>
+                                <div class="write_append">
+                                    <div class="wrap_btn">
+                                        <button class="btn_default" type="submit">확인</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+        
+<?php       
+            }
+            else {
+?>
+                <div class="wrap_comment_write comment_write">
+                    <div class="box_area">
+                        <span class="wrap_area_logout">
+                            <a href="../html/login.html" class="a_tf_area_logout">
+                                <span class="tf_area_logout">로그인하고 댓글을 입력해보세요!</span>
+                            </a>
+                        </span>
+                    </div>
+                </div>
+<?php
+            }
+?>
+        </div>
+    </main>
+    <script src="../js/header.js"></script>
+    <script src="../js/comment.js"></script>
+    <script>
+
+        $(document).ready(function() {
+            $('.c_textarea').on( 'keyup', 'textarea', function (e){
+            $(this).css('height', 'auto' );
+            $(this).height( this.scrollHeight );
+            });
+            $('.c_textarea').find( 'textarea' ).keyup();
+
+            $('.comment_content tr').addClass('list_comment');
+            $('.comment_content tr').attr("reply_type","all");
+            $('.comment_reply tr').addClass('reply_comment');
+        });
+
+        function BtnClick() {
+            var comment = document.getElementById("Comment");
+            
+            if (comment.style.display == "none") {
+                comment.style.display = "block";
+            } 
+            else {
+                comment.style.display = "none";
+            }
+        };
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,384 @@
+html, body {
+    font-family: "Lato","Noto Sans KR","Noto Serif KR","맑은 고딕",sans-serif;
+    font-size: 14px;
+    color: #333;
+}
+body {
+    margin: 0;
+    overflow-x: hidden;
+}
+a{
+    color: inherit;
+    text-decoration: none;
+    outline: none;
+}
+button {
+    border: 0 none;
+    cursor: pointer;
+    outline: none;
+    border-radius: 0px;
+    background-color: #fff;
+}
+ul {
+    list-style: none;
+} 
+li {
+    list-style: none;
+} 
+
+input:focus {
+    outline: none;
+}
+article {
+    display: block
+}
+input:focus::-webkit-input-placeholder,
+textarea:focus::-webkit-input-placeholder {
+  color:transparent;
+}
+
+textarea {
+    resize: none;
+    overflow: hidden;
+}
+
+fieldset {
+    border: 0 none;
+}
+
+pre {
+    margin: 0;
+    font-family: "Noto Sans KR";
+}
+
+/* header */
+
+.btn {
+    display: block;
+    width: 27px;
+    height: 20px;
+    position: absolute;
+    left: 35px;
+}
+.btn span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background-color: #333;
+    position: absolute;
+}
+.btn span:nth-child(1) { top: 0; }
+.btn span:nth-child(2) { top: 10px; }
+.btn span:nth-child(3) { top: 20px; }
+
+/* side button end */
+
+#logo {
+    position: relative;
+    left: 60px;
+    width: 94px;
+    margin-left: 15px;
+}
+
+#logo a{
+    display: block;
+    width: 94px;
+    height: 22px;
+    background-image: url("../images/layout/logo.png");
+    overflow: hidden;
+    text-indent: -9999px;
+}
+
+/*logo end*/
+
+.start {
+    top:16px;
+    right: 30px;
+    position: absolute;
+    display: block;
+    width: 64px;
+    height: 28px;
+    color: #666;
+    border: 1px solid #959595;
+    border-radius: 16px;
+    line-height: 28px;
+    font-size: 12px;
+    text-align: center;
+}
+
+
+.btn_search {
+    position: absolute;
+    display: block;
+    top:20px;
+    right: 55px;
+    background-image: url("../images/layout/search.png");
+    width: 22px;
+    height: 22px;
+    overflow: hidden;
+    text-indent: -9999px;
+}
+
+/* side menu */
+
+#wrapSideMenu {
+    background-color: #fff;
+    border-right: 1px solid #ddd;
+    width: 316.5px;
+    margin-left: -320px;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in;
+    position: fixed;
+    z-index: 2;
+    height: 100%;
+    top: 0;
+    left: 0;
+    text-align: center;
+}
+
+#wrapSideMenu.open {
+    margin-left: 0;
+}
+
+#wrapSideMenu .side_profile {
+    height: 267px;
+    background: #f8f8f8;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+#wrapSideMenu .logo_service {
+    background-image: url("../images/layout/profile.png");
+    background-repeat: no-repeat;
+    overflow: hidden;
+    width: 48px;
+    height: 48px;
+    margin: 40px auto 9px;
+
+}
+
+#wrapSideMenu .slogan {
+    font-family: "Noto Serif KR";
+    font-size: 12px;
+    line-height: 1.35;
+    text-align: center;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+#wrapSideMenu .slogan_writer{
+    font-family: "Noto Serif KR";
+    font-size: 11px;
+    letter-spacing: 0.3px;
+    text-align: center;
+    color: #959595;
+}
+
+#wrapSideMenu .btn_request {
+    width: 130px;
+    height: 32px;
+    border-radius: 16px;
+    border: 1px solid #fec1a2;
+    font-size: 14px;
+    color: #fec1a2;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+
+/*profile end*/
+
+#wrapSideMenu .side_menu {
+    border-top: 1px solid #ddd;
+    padding-top: 28px;
+    height: 427px;
+}
+
+#wrapSideMenu .side_menu ul {
+    padding-left: 0;
+}
+
+#wrapSideMenu .side_menu li {
+    height: 13px;
+    line-height: 13px;
+    padding: 12px 0;
+    width: 280px;
+    margin: 0 auto;
+    font-size: 15px;
+    color: #666;
+}
+
+#wrapSideMenu .side_menu li a {
+    height: 13px;
+    line-height: 14px;
+    display: block;
+    position: relative;
+}
+
+#wrapSideMenu .side_menu li.now_page a {
+    color: #fec1a2;
+}
+
+#wrapSideMenu .side_menu li.now_page a span {
+   display: block;
+   border-bottom: 1px solid #fec1a2;
+   position: absolute;
+   top: 6px;
+   width: 35px;
+}
+
+#wrapSideMenu .side_menu li.now_page a span.bar_left {
+    left: 60px;
+ }
+
+#wrapSideMenu .side_menu li.now_page a span.bar_right {
+    right: 60px;
+ }
+
+#wrapSideMenu .side_menu li:hover a {
+    color: #fec1a2;
+}
+
+#wrapSideMenu .side_menu li.active {
+    color: #fec1a2;
+}
+
+#wrapSideMenu .side_menu li:hover a span {
+    display: block;
+    border-bottom: 1px solid #fec1a2;
+    position: absolute;
+    top: 6px;
+    width: 35px;
+}
+
+#wrapSideMenu .side_menu li:hover a span.bar_left {
+    left: 60px;
+ }
+
+ #wrapSideMenu .side_menu li:hover a span.bar_right {
+    right: 60px;
+ }
+
+ /* sidemenu end */
+
+ #wrapSideMenu .find_user_setting {
+     position: absolute;
+     margin-bottom: 37px;
+     bottom: 0;
+     width: 100%;
+     margin: 40px 0 30px;
+
+ }
+
+ #wrapSideMenu .find_user {
+    font-size: 13px;
+    color: #959595;
+    border-bottom: 1px solid #bbb;
+ }
+
+
+ /* side menu end */
+
+ /* login 경우 */
+ #wrapSideMenu .wrap_profile_info {
+    padding: 10px;
+    margin-left: -2px;
+}
+
+#wrapSideMenu .profile_name {
+    font-size: 15px;
+    color: #333;
+    display: inline-block;
+    font-weight: 500;
+    overflow: hidden;
+    vertical-align: bottom;
+    width: 212px;
+}
+
+#wrapSideMenu .profile_id {
+    font-size: 12px;
+    color: #959595;
+    font-style: italic;
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+    margin-top: 0;
+    width: 212px;
+    font-family: "Noto Serif KR";
+}
+
+#wrapSideMenu .wrap_profile_img {
+    width: 80px;
+    height: 80px;
+    margin: 50px auto 0;
+    border: 1px solid #ccc;
+    border-radius: 100%;
+}
+
+#wrapSideMenu .img_profile {
+    width: 80px;
+    height: 80px;
+    background: transparent;
+    border-radius: 100%;
+}
+
+#wrapSideMenu .btn_photo {
+    width: 100px;
+    height: 32px;
+    border-radius: 16px;
+    border: 1px solid #fec1a2;
+    font-size: 14px;
+    color: #fec1a2;
+    margin-top: 13px;
+    font-weight: bold;
+}
+
+#wrapSideMenu .login .btn_request {
+    width: 100px;
+    height: 32px;
+    border-radius: 16px;
+    border: 1px solid #fec1a2;
+    font-size: 14px;
+    color: #fec1a2;
+    margin-top: 13px;
+    margin-left: 4px;
+}
+
+#wrapSideMenu .side_menu .hr {
+    height: 15px;
+    margin: 30px auto 32px;
+    padding: 0;
+    display: block;
+}
+
+#wrapSideMenu .side_menu .hr .border{
+    border: 1px solid #f8f8f8;
+    width: 180px;
+    left: 60px;
+    position: absolute;
+}
+
+#wrapSideMenu .side_setting {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    margin: 40px 0 30px;
+}
+
+#wrapSideMenu .side_setting button {
+    width: 80px;
+    height: 32px;
+    border: 1px solid #bbb;
+    border-radius: 16px;
+    color: #959599;
+    margin: 0 2px;
+    font-size: 13px;
+}
+
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}

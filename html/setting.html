@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>미니 사진관</title>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500|Noto+Serif+KR:400,500 | Lato:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/setting.css">
+    <link rel="stylesheet" href="../css/swiper.css">
+    <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
+    <script src="../js/swiper.min.js"></script>
+    <script src="../js/TweenMax.min.js"></script>
+</head>
+<body>
+    <?php include '../include/header.php';?>
+    <?php
+        $connect = mysqli_connect('127.0.0.1', 'project', 'bitnami', 'project');
+        $userid = $_SESSION['userid'];
+        $query = "select nickname, description, address from UserInfo where userid = '$userid'";
+        $result = $connect->query($query);
+        $rows = mysqli_fetch_assoc($result);
+
+        $query2 = "SELECT * FROM Images WHERE userid = '$userid' ORDER BY image_id DESC LIMIT 1";
+        $result2 = $connect->query($query2);
+        $rows2 = mysqli_fetch_assoc($result2);
+        session_start();
+    ?>
+    <div class="setting">
+        <div class="wrap_inner">
+            <div class="wrap_custom_setting">
+                <!-- <span>설정</span> -->
+                <div class="cover_color">
+                    <span class="text">설정</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <main id="profile">
+        <article id="mArticle">
+            <div class="edit_setting">
+                <div class="set_profile">
+                    <div class="edit_coverimg">
+                        <div class="profile_img">
+                            <div id="dropzone" class="dropzone">
+                                <img src="<?php echo $rows2['imgurl']?>" alt="" class="profileUserImg">
+<?php                           if(!isset($rows2['imgurl'])) {
+?>
+                                    <div class="dragtext">파일 드래그</div>
+<?php                           }
+?>
+                            </div>
+                        </div>
+                    </div>
+                    <form action="../php/user_edit.php" method="POST">
+                        <div class="edit_profile">
+                            <div class="user_edit">
+                                <div class="head_iedit">
+                                    <h3 class="tit_edit">
+                                        <label for="authorName" class="lab_comm">작가명</label>
+                                    </h3>
+                                </div>
+                                <div class="user_nickname">
+                                    <input class="nickname" name="nickname" id="nickname" placeholder="닉네임을 입력해주세요." maxlength="30" value="<?php echo $rows['nickname']?>">
+                                </div>
+                            </div>
+                            <div class="head_iedit2 head_iedit">
+                                <h3 class="tit_edit">
+                                    <label class= "lab_comm" for="profileInfo">소개</label>
+                                </h3>
+                            </div>
+                            <div class="profile_box">
+                                	<textarea name="description" id="profileInfo" class="profileInfo" placeholder="간단한 소개를 입력해주세요." maxlength="100"><?php echo $rows['description']?></textarea>
+                            </div>
+                        </div>
+                        <div class="set_info">
+                            <strong class="tit_info">
+                                <label for="profileInfo">사진관 주소</label>
+                            </strong>
+                            <div class="address_info">
+                                <span class="address">
+                                    https://brunch.co.kr/@<input class="address" type="text" name="address" autocomplete="off" value="<?php echo $rows['address']?>">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="wrap_btn">
+                                <a href="m_studio.html?address=<?php echo $rows['address']?>"><button class="btn_set cancel" type="button">취소</button></a>
+                            </div>
+                        <div class="wrap_btn">
+                            <button class="btn_set save" type="submit" name="submit">저장</button>
+                        </div>
+                    </form>
+                    <a href class="link_leave">탈퇴하기</a>
+                </div>
+            </div>
+        </article>
+    </main>
+    <div id="layerLeave" class="leave_layer">
+        <button class="icon_img link_close"></button>
+        <div class="popup_leave">
+            <h2>탈퇴하기</h2>
+            <div class="caution">
+                탈퇴하시면 이용 중인 게시판이 폐쇄되며, <b>모든 데이터는 복구가 불가능합니다.</b><br>
+                아래 사항을 확인하신 후에 신중하게 결정해 주세요.
+            </div>
+            <ul>
+                <li>
+                    <span class="ico_dot"></span>
+                    작성한 글, 첨부한 사진 등 모든 정보가 삭제됩니다.
+                </li>
+                <li>
+                    <span class="ico_dot"></span>
+                    프로필 정보가 삭제됩니다.
+                </li>
+                <li>
+                    <span class="ico_dot"></span>
+                    재가입을 해도 정보가 남아 있지 않으니, 탈퇴 전 미리 확인하시기 바랍니다.
+                </li>
+            </ul>
+            <form action="../php/user_delete.php" method="POST" onsubmit="return CheckForm()" name="frmleave">
+                <span class="choice_checkbox">
+                    <input id="leaveAgree" type="checkbox" class="checkbox" name="leaveAgree">
+                    <label for="leaveAgree" class="lab_comm" id="leaveAgreeLabel">
+                        <span class="icon_v1"></span>
+                        안내사항을 모두 학인하였으며, 이에 동의합니다.
+                    </label>
+                </span>
+                <br>
+                <button class="btn_confirm" type="submit">탈퇴하기</button>
+            </form>
+        </div>
+    </div>
+    <script src="../js/header.js"></script>
+    <script src="../js/setting.js"></script>
+    <script>
+
+        $(document).ready(function() {
+            $('.profile_box').on( 'keyup', 'textarea', function (e){
+            $(this).css('height', 'auto' );
+            $(this).height( this.scrollHeight );
+            });
+            $('.profile_box').find( 'textarea' ).keyup();
+        });
+
+        function CheckForm() {
+            var check = document.frmleave.leaveAgree.checked;
+
+            if(!check) {
+                alert('동의 후 다시 시도해주세요.');
+                return false;
+            }
+        }
+    
+        $(document).ready(function(){
+            $(".dropzone").on("dragover",function(){
+                $(this).addClass("dragover");
+                $(".dragtext").addClass("dragover");
+                return false;
+            });
+
+            $(".dropzone").on("dragleave", function(){
+                $(this).removeClass("dragover");
+                $(".dragtext").removeClass("dragover");
+                return false;
+            });
+
+            $(".dropzone").on("drop", function(e){
+                e.preventDefault();
+                $(this).removeClass("dragover");
+                $(".dragtext").addClass("none");
+                var formData = new FormData();
+
+                var files_list = e.originalEvent.dataTransfer.files;
+
+                console.log(files_list); 
+
+                for(var i=0; i<files_list.length; i++) {
+                    formData.append("file[]",files_list[i]);
+                }
+
+                // for (var key of formData.keys()) {
+
+                //     console.log(key);
+
+                //     }
+
+                //     for (var value of formData.values()) {
+
+                //     console.log(value);
+
+                //     }
+
+                $.ajax({
+                    url: "../php/dragdrop.php",
+                    method: "POST",
+                    data: formData,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success:function(data) {
+                        $("#dropzone").html(data);
+                    }
+                })
+            });
+        });
+    </script>
+</body>
+</html>

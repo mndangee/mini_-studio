@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>미니 사진관</title>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500|Noto+Serif+KR:400,500 | Lato:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/swiper.css">
+    <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
+    <script src="../js/swiper.min.js"></script>
+    <script src="../js/TweenMax.min.js"></script>
+</head>
+<body>
+    <?php include '../include/header.php';?>
+    <?php
+        $connect = mysqli_connect('127.0.0.1', 'project', 'bitnami', 'project') or die ("connect fail");
+        $query = "select * from Post order by post_id desc";
+        $result = $connect->query($query);
+        $total = mysqli_num_rows($result);
+    ?>
+    <!-- <div class="overlay"></div> -->
+    <main id="main" class="cont_MinS">
+        <!-- 최근 게시글 -->
+        <div class="cMain">
+            <article class="mArticle">
+                <div class="intro">
+                    <h3 class="title">사진을 찍고 전시하는 공간, 미니사진관</h3>
+                    <p class="desc">
+                        <span class="part">나만의 사진관에 어서오세요.<br></span>
+                        <span class="part">잘하거나 못하거나 상관 없습니다.<br></span>
+                        <span class="part">그저 그날의 추억을 간직하는 나만의 사진을 전시할 뿐이죠.<br></span>
+                    </p>
+                </div>
+                <div id="Visual">
+                    <table class="swiper-container">
+                        <tbody class="swiper-wrapper">
+<?php
+                            while($rows = mysqli_fetch_assoc($result)){
+                                if($total%2==0){
+?>
+<?php                                   }
+                                else{
+?> 
+
+                                    <tr>
+<?php                                   }
+?>                                  
+                                    <?php
+                                        $connect = mysqli_connect('127.0.0.1', 'project', 'bitnami', 'project') or die ("connect fail");
+                                        $userid = $rows['userid'];
+                                        $query2 ="select nickname, address from UserInfo where userid = '$userid'";
+                                        $result2 = $connect->query($query2);
+                                        $total2 = mysqli_num_rows($result2);
+                                        $rows2 = mysqli_fetch_assoc($result2);
+                                    ?>
+                                    <td class="animation_up">
+                                        <div class="box_text">
+                                            <a href="view.html?post_id=<?php echo $rows['post_id']?>" class="link_post">
+                                                <div class="post_title">
+                                                    <strong class="title_subject"><?php echo $rows['title']?></strong>
+                                                    <div class="wrap_sub_content">
+                                                        <em class="subtitle"><?php echo $rows['subtitle']?></em>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <div class="append_common">
+                                                <span class="ico_by">by</span>
+                                                <a href="m_studio.html?address=<?php echo $rows2['address']?>" class="link_bloger"><?php echo $rows2['nickname']?></a>
+                                            </div>
+                                        </div>
+                                        <div class="back_image">
+                                            <div class="img_pic"><?php echo $rows['content']?></div>
+                                            <!-- <img src="../images/contents/mndangee_pic2.jpg" class="img_pic"> -->
+                                            <div class="gray_mask"></div>
+                                        </div>
+                                    </td >
+                                </tr>
+<?php
+                                $total--;
+                            }
+?>    
+                        </tbody>
+                    </table>
+                    <div class="wrap_btn">
+                        <a href="" class="btnPrev btn_mstudio swiper-button-prev"><img src="../images/main/btnPrev.png" alt=""></a>
+                        <a href="" class="btnNext btn_mstudio swiper-button-next"><img src="../images/main/btnNext.png" alt=""></a>
+                    </div>
+                </div>
+            </article>
+        </div>
+        <!-- 작가 목록 -->
+        <?php
+            $connect = mysqli_connect('127.0.0.1', 'project', 'bitnami', 'project') or die ("connect fail");
+            $query2 ="select * from UserInfo";
+            $result2 = $connect->query($query2);
+            $total2 = mysqli_num_rows($result2);
+        ?>
+        <div class="writer">
+            <h3 class="text_writer">미니 스튜디오 작가님</h3>
+            <div class="wrap_writers">
+                <table>
+                    <tbody>
+<?php
+                        while($rows2 = mysqli_fetch_assoc($result2)){
+                            if($total2%2==0){
+?>
+<?php                       }
+                            else{
+?>
+                                <tr>
+<?php                       }
+?>                                  
+                                    <?php
+                                        $connect = mysqli_connect('127.0.0.1', 'project', 'bitnami', 'project') or die ("connect fail");
+                                        $userid = $rows2['userid'];
+                                        $query3 = "SELECT * FROM Images WHERE userid = '$userid' ORDER BY image_id DESC LIMIT 1";
+                                        $query3 = $connect->query($query3);
+                                        $rows3 = mysqli_fetch_assoc($query3);
+                                    ?>
+                                    <td class="profile">
+                                        <a href="m_studio.html?address=<?php echo $rows2['address']?>" class="link_bloger">
+                                            <div class="border">
+                                                <img src="<?php echo $rows3['imgurl']?>" alt="" class="profileUserImg" id="profileUserImg">
+                                            </div> 
+                                            <strong class="tit_writer"><?php echo $rows2['nickname']?></strong>
+<?php                                       if($rows2['description'] == null) {
+?>
+                                                <span class="desc_intro">등록된 소개가 없습니다.</span>
+<?php                                       }
+                                            else {
+?>                                           
+                                                <span class="desc_intro"><?php echo $rows2['description']?></span>                                           
+<?php                                   }
+?>
+                                        </a>
+                                    </td >
+                                </tr>
+<?php
+                                $total2--;
+                        }
+?>    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <script src="../js/header.js"></script>
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 6,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev"
+            },  
+        });
+
+        $(document).ready(function() {
+            $('#Visual tr').addClass('swiper-slide');
+            $('.wrap_writers tr').addClass('wirter_list');
+        });
+    </script>
+</body>
+</html>

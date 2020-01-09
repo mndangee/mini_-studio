@@ -1,0 +1,262 @@
+.intro {
+    width: 960px;
+    margin: 50px auto;
+}
+
+.intro .title {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 40px;
+    font-weight: 400;
+    font-family: "Noto Serif KR";
+    color: #333;
+    text-align: center;
+}
+
+.intro .desc {
+    padding-bottom: 16px;
+    margin-top: -3px;
+    font-size: 32px;
+    font-family: "Noto Serif KR";
+    color: #cacaca;
+    text-align: center;
+}
+
+/* 글 부분 end */
+
+#Visual {
+    position: relative;
+    margin-top: 22px;
+    
+}
+
+/* 스와이프  시작*/
+
+
+.wrap_btn .btn_mstudio {
+    margin-top: -77px;
+    position: absolute;
+    top: 55%;
+    z-index: 10;
+    width: 100px;
+    height: 100px;
+}
+
+.wrap_btn .btnPrev {
+    left: -25px;
+}
+
+.wrap_btn .btnNext {
+    right: -25px;
+}
+
+/* 스와이프 버튼  끝*/
+
+/* 테이블 */
+
+table {
+    width: 100%;
+    height: 520px;
+    position: relative;
+    display: inline-block;
+}
+
+tbody {
+    width: 100%;
+    height: 520px;
+    position: relative;
+    display: inline-block; 
+}
+
+#Visual tr {
+    width: 316.5px;
+    height: 520px;
+    /* background-color: #333; */
+    position: relative;
+}
+
+#Visual td {
+    position: relative;
+}
+
+.animation_up {
+    position: absolute;
+    top: 0;
+    margin-top: 70%;
+    width: 100%;
+    color: #fff;
+    text-align: center;
+    display: inline-block;
+}
+
+.animation_up .post_title {
+    display: table-cell;
+    height: 100%;
+    max-height: 75px;
+    display: block;
+    font-family: "Noto Serif KR";
+    line-height: 27px;
+    letter-spacing: -0.025em;
+}
+
+.animation_up .box_text {
+    top: 0;
+}
+
+.post_title strong {
+    font-weight: 400;
+    font-size: 24px;
+}
+
+.post_title .wrap_sub_content .subtitle {
+    font-style: normal;
+    font-size: 20px;
+}
+
+.append_common {
+    font-size: 14px;
+}
+
+
+.animation_up .back_image:hover .img_pic .contentimg {
+    transform:scale(1.2);
+    overflow: hidden;
+}
+
+/* .animation_up .back_image .link_item {
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    transition:all 0.25s;
+} */
+
+.animation_up .back_image {
+    width: 100%;
+    height: 100%;
+    transition:all 0.25s;
+    margin-top: -287px;
+    position: absolute;
+    transition:all 0.25s;
+    z-index: -10;
+}
+
+.animation_up .back_image .gray_mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 316.5px;
+    height: 520px;
+    background-color: #333;
+    opacity: 0.2;
+    transition: 3s ease-in-out;
+}
+
+.animation_up .img_pic {
+    width: 316.5px;
+    height: 520px;
+    transition:all 0.25s;
+    overflow: hidden;
+    position: absolute;
+}
+
+.img_pic div .contentimg:not(:first-child) {
+    display: none !important;
+}
+
+.img_pic div .contentimg {
+    width: 316.5px !important;
+    height: 520px !important;
+    position: absolute;
+    top: 0;
+    left: 0;;
+}
+
+.img_pic img:only-of-type {
+    display: block !important;
+}
+
+/* 작가 목록 시작 */
+
+.writer {
+    margin: 150px auto;
+    padding-top: 100px;
+    background: #FAFAFA;
+    height: 910px;
+}
+
+.writer .text_writer {
+    margin-top: 0;
+    font-family: "Noto Serif KR";
+    text-align: center;
+    font-size: 28px;
+}
+
+.writer .wrap_writers {
+    width: 960px;
+    margin: 50px auto 85px;
+}
+
+.writer .wrap_writers tr {
+    float: left;
+}
+
+.writer .wrap_writers .wirter_list {
+    margin-left: 0;
+    position: relative;
+    margin-bottom: 15px;
+    text-align: center; 
+}
+
+.writer .link_bloger {
+    display: block;
+    padding: 46px 40px;
+    background: #fff;
+    text-decoration: none;
+    width: 234px;
+}
+
+.profile .border {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    margin: 0 auto;
+}
+
+.writer .profileUserImg {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    display: block;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 50%;
+}
+
+.writer .tit_writer {
+    padding: 17px 12px 0;
+    font-size: 20px;
+    font-family: "Noto Serif KR";
+    line-height: 28px;
+    white-space: normal;
+    word-break: keep-all;
+    word-wrap: break-word;
+    display: block;
+    font-weight: 400;
+}
+
+.profile .desc_intro {
+    word-break: keep-all;
+    height: 60px;
+    margin-top: 16px;
+    padding: 0;
+    font-family: "Noto Sans KR";
+    font-weight: 300;
+    color: #959595;
+    opacity: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}

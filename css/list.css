@@ -1,0 +1,237 @@
+
+.wrap_custom_piclist {
+    width: 250px;
+    margin-left: -125px;
+    top: 27px;
+    color: #666;
+    font-size: 17px;
+    display: inline-block;
+    left: 50%;
+    position: absolute;
+    margin-top: -3px;
+}
+
+.btn_piclist_list.active {
+    color: #fec1a2;
+    border-bottom: 2px solid #fec1a2;
+    margin-top: 2px;
+}
+
+.btn_piclist_list {
+    margin-right: 18px;
+}
+
+.btn_piclist_collect {
+    margin-right: 18px;
+}
+
+.btn_piclist_collect.active {
+    color: #fec1a2;
+    border-bottom: 2px solid #fec1a2;
+}
+
+.wrap_custom_piclist button {
+    color: #666;
+    font-size: 17px;
+    outline: none;
+}
+
+.wraplist {
+    overflow: hidden;
+    width: 700px;
+    margin: 60px auto 0;
+    padding: 0 120px 111px;
+}
+
+.screen_out {
+    overflow: hidden;
+    position: absolute;
+    width: 0;
+    height: 0;
+    text-indent: -9999px;
+}
+
+.wrap_pic_empty {
+    overflow: hidden;
+}
+
+.wrap_pic_empty {
+    display: none;
+    text-align: center;
+    margin-top: 140px;
+}
+
+.wrap_pic_empty em {
+    font-size: 18px;
+    color: #666;
+    margin: 6px 0 2px;
+    display: block;
+    display: none;
+}
+
+table {
+    width: 100%;
+}
+
+.wrap_pic_list td {
+    padding: 15px 0 20px;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 120px;
+}
+
+.wrap_pic_list .link_post {
+    display: block;
+    clear: both;
+    overflow: hidden;
+    color: #333;
+    text-decoration: none;
+}
+
+.wrap_pic_list .post_title {
+    float: left;
+}
+
+.wrap_pic_list .title_subject {
+    font-weight: 400;
+    font-size: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 43px;
+    margin-left: -1.5px;
+}
+
+.wrap_pic_list .wrap_sub_content {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.wrap_sub_content pre {
+    margin-top: -20px;
+    margin-bottom: -25px;
+}
+
+.my_content pre {
+    margin-bottom: -40px;
+}
+
+.wrap_pic_list .subtitle {
+    padding-top: 6px;
+    font-size: 14px;
+    color: #666;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.wrap_pic_list .pic_content {
+    color: #666;
+    font-size: 14px;
+    line-height: 21px;
+    overflow: hidden;
+    display: block;
+    max-height: 43px;
+    text-overflow: ellipsis;
+    margin-top: 10px;
+}
+
+.wrap_pic_list .post_time {
+    display: block;
+    font-size: 12px;
+    color: #959595;
+}
+
+.wrap_pic_list .post_time span {
+    float: left;
+}
+
+.append_common {
+    overflow: hidden;
+    width: 100%;
+    font-size: 12px;
+    color: #959595;
+}
+
+.append_common .ico_by {
+    float: left;
+    width: 15px;
+    height: 15px;
+    margin-right: 4px;
+    font-size: 12px;
+    color: #bfbfbf;
+    font-style: italic;
+}
+
+.append_common .link_bloger {
+    float: left;
+    color: #959595;
+    font-weight: 400;
+}
+
+.wrap_custom_now {
+    width: 110px;
+    margin-left: -55px;
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    text-align: center;
+    margin-top: -3px;
+}
+
+.wrap_custom_now span {
+    color: #333;
+    font-size: 17px;
+    text-align: center;
+}
+
+.ico_dot {
+    float: left;
+    width: 2px;
+    height: 2px;
+    margin: 8px 6px 11px;
+    background-color: #bfbfbf;
+    vertical-align: top;
+}
+
+#wrapInfo .wrap_pic_list table {
+    padding-top: 20px;
+}
+
+.pic_content div {
+    text-align: left !important;
+}
+
+.pic_content * {
+    font-family: "Noto Sans KR" !important;
+    font-size: 14px !important;
+}
+
+#thumbnails {
+    float: right;
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    margin-left: 567px;
+    top: 25px;
+}
+
+.contentimg {
+    width: 120px !important;
+    height: 120px !important;
+}
+
+
+#lickpic {
+    display: none;
+}
+
+.contentimg:not(:first-child) {
+    display: none !important;
+}
+
+.contentimg:only-child {
+    display: block !important;
+}

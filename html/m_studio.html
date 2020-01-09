@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>미니 사진관</title>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500|Noto+Serif+KR:400,500 | Lato:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/list.css">
+    <link rel="stylesheet" href="../css/m_studio.css">
+    <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
+    <script src="../js/swiper.min.js"></script>
+    <script src="../js/TweenMax.min.js"></script>
+</head>
+<body>
+    <?php include '../include/header.php';?>
+    <?php
+        $connect = mysqli_connect('127.0.0.1', 'project', 'bitnami', 'project');
+        $address = $_GET['address'];
+        $query = "select * from UserInfo where address = '$address'";
+        $result = $connect->query($query);
+        $rows = mysqli_fetch_assoc($result);
+
+        $userid = $rows['userid'];
+        $query2 = "SELECT * FROM Images WHERE userid = '$userid' ORDER BY image_id DESC LIMIT 1";
+        $result2 = $connect->query($query2);
+        $rows2 = mysqli_fetch_assoc($result2);
+        session_start();
+    ?>
+    <!-- <div class="overlay"></div> -->
+    <script src="../js/header.js"></script>
+    <div class="cover_background">
+        <div class="wrap_inner">
+            <div class="wrap_custom_setting">
+                <div class="cover_color"></div>
+            </div>
+        </div>
+    </div>
+    <main id="profile">
+        <article id="mArticle">            
+            <div id="wrapHome" class="set_profile">
+                <div class="wrap_profile">
+                    <div class="wrap_profile_img">
+                        <div class="profile_img">
+                                <div class="border">
+                                    <img src="<?php echo $rows2['imgurl']?>" alt="" class="profileUserImg" id="profileUserImg">
+                                </div>
+                        </div>
+                    </div>
+                    <div class="wrap_profile_desc">
+                        <strong class="profile_nickname"><?php echo $rows['nickname']?></strong>
+<?php                   if($rows['description'] == null) {
+?>
+                            <p class="desc_intro">등록된 소개가 없습니다.</p>
+<?php                   }
+                        else {
+?>
+                            <pre>
+                            	<p class="desc_intro"><?php echo $rows['description']?></p>
+                            </pre>
+<?php                   }
+?>
+                    </div>
+<?php               if($_SESSION['userid'] == $rows['userid']) {
+?>
+                        <div class="wrap_profile_btn">
+                            <a href="write.html">
+                                <button class="btn_write" type="button">사진전시</button>
+                            </a>
+                            <div class="more_control">
+                                <button class="btn_control" type="button">
+                                    <span class="icon_contrl ico_v1"></span>
+                                </button>
+                                <div class="control_action">
+                                    <div class="inner_action_control">
+                                        <a href="setting.html">
+                                            <button class="edit_profile" type="button">프로필 편집</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+<?php               }
+?>
+                </div>
+                <div class="wrap_contents">
+                    <?php
+                        $connect = mysqli_connect('127.0.0.1', 'project', 'bitnami', 'project') or die ("connect fail");
+                        $query3 ="select * from Post order by post_id desc";
+                        $result3 = $connect->query($query3);
+                        $total = mysqli_num_rows($result3);
+                    ?>
+                    <?php
+                        $connect = mysqli_connect('127.0.0.1', 'project', 'bitnami', 'project') or die ("connect fail");
+                        $userid = $rows['userid'];
+                        $query4 ="select * from Post WHERE userid = '$userid'";
+                        $result4 = $connect->query($query4);
+                        $total2 = mysqli_num_rows($result4);
+                    ?>
+                        <div id="wrapInfo" class="wrap_authorinfo">
+                            <button class="text_tab" onclick="Click()">
+                                <div id="text_tab" class="text">
+                                    <span>작성 글</span>
+                                    <span class="num_count"><?php echo $total2?></span>
+                                </div>
+                            </button>
+                            <div id="conList" class="wrap_pic_list">
+                                <table>
+                                    <tbody>
+<?php
+                                    while($rows3 = mysqli_fetch_assoc($result3)) {
+                                        if($rows['userid'] == $rows3['userid']){
+                                            if($total%2==0){
+?>
+                                                <tr class="wrap_pic_empty"></tr >
+<?php                                               }
+                                        else{
+?>
+                                                <tr class="list_pic">
+<?php                                               }
+?>                                                  <td class="animation_up">
+                                                        <a href="view.html?post_id=<?php echo $rows3['post_id']?>" class="link_post">
+                                                            <div class="post_title">
+                                                                <strong class="title_subject"><?php echo $rows3['title']?></strong>
+                                                                <div class="wrap_sub_content my_content">
+                                                                    <em class="subtitle"><?php echo $rows3['subtitle']?></em>
+                                                                    <span class="pic_content"><?php echo $rows3['content']?></span>
+                                                                </div>
+                                                                <div class="post_time">
+                                                                    <span class="publish_time"><?php echo $rows3['date']?></span>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </td >
+                                                </tr>
+<?php
+                                            $total--;
+                                        }
+                                    }
+?>    
+                                        </tbody>
+                                    </table>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </article>
+    </main>
+    <div id="zoom_in" class="zoom_in">
+        <div class="profile_img">
+                <img src="<?php echo $rows2['imgurl']?>" alt="" class="profileUserImg zoom_in_image" id="zoom_in_image">
+        </div>
+    </div>
+    <script src="../js/header.js"></script>
+    <script>
+        $(".profile_img").on("click",function(){
+            $(".zoom_in").addClass("active");
+            return false;
+        });
+        $(".zoom_in").on("click",function(){
+            $(".zoom_in").removeClass("active");
+            return false;
+        });
+        $(".zoom_in_image").on("click",function(){
+            $(".zoom_in").removeClass("active");
+            return false;
+        });
+        $(".btn_control").on("click",function(){
+            $(".more_control").addClass("action");
+            return false;
+        });
+        $("body").not(".control_action").on("click",function(){
+            $(".more_control").removeClass("action");
+            // return false;
+        });
+
+        function Click() {
+            var conList = document.getElementById("conList");
+            var text_tab = document.getElementById("text_tab");
+            
+            if (conList.style.display == "none") {
+                conList.style.display = "block";
+                text_tab.style.color = "#333";
+
+            } 
+            else {
+                conList.style.display = "none";
+                text_tab.style.color = "#959595";
+            }
+        };
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>미니 사진관</title>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500|Noto+Serif+KR:400,500 | Lato:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/sign_up.css">
+    <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
+</head>
+<body>
+    <?php include '../include/header.php';?>
+    <div class="overlay"></div>
+    <main id="main" class="join_con">
+        <div class="contnet">
+            <div class="con">
+                <div id="titleArea">
+                    <h3>회원 가입</h3>
+                </div>
+                <div id="join">
+                    <div class="page_body">
+                        <div class="join_form">
+                            <form name="join" method="post" action="../php/joinform.php" onsubmit="return myFunction()">
+                                <ul class="join_f">
+                                    <li>
+                                        <label class="opacity">이름</label>
+                                        <input id="name" class="input_join" type="text" name="name" autocomplete="off">
+                                        <span id="name_text" class="name_text join_text"></span>
+                                    </li>
+                                    <li>
+                                        <label>아이디</label>
+                                        <input id="userid" class="input_join" type="text" name="userid" autocomplete="off">
+                                        <span id="id_text" class="join_text id_text"></span>
+                                    </li> 
+                                    <li>                            
+                                        <label>비밀번호</label>
+                                        <input id="password" class="input_join" type="password" name="password" autocomplete="off">
+                                        <span id="passwd_text" class="join_text passwd_text">6글자 이상, 16글자 이하만 이용 가능합니다.</span>
+                                    </li>
+                                    <li>
+                                        <label>비밀번호 확인</label>
+                                        <input id="password2" class="input_join" type="password" name="password2" autocomplete="off">
+                                        <span id="passwd2_text" class="join_text passwd2_text"></span>
+                                    </li>
+                                    <li>
+                                        <label>닉네임</label>
+                                        <input id="nickname" class="input_join" type="text" name="nickname" autocomplete="off">
+                                        <span id="nickname_text" class="join_text nickname_text"></span>
+                                    </li>
+                                </ul>
+                                <div class="button">
+                                    <input class= "joinReq" type="submit" value="회원가입">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="../js/header.js"></script>
+    <script>
+        function myFunction() {
+           
+            var myform = document.forms['join']
+
+            if (myform['password'].value == "") {
+                document.getElementById("passwd_text").innerHTML="비밀번호를 입력해 주세요";
+                return false;
+            }
+            else {
+                if(myform['password'].value.length > 16 || myform['password'].value.length < 6) {
+                    document.getElementById("passwd_text").innerHTML="비밀번호는 6글자 이상, 16글자 이하로만 설정하셔야 합니다.";
+                    return false;
+                }
+                else {
+                    if (myform['pass word'].value != myform['password2'].value) {
+                        document.getElementById("passwd_text").innerHTML=" ";
+                        document.getElementById("passwd2_text").innerHTML="비밀번호가 일치하지 않습니다.";
+                        return false;
+                    }
+                    else return true;
+                }
+            }
+
+        }
+    </script>
+</body>
+</html>

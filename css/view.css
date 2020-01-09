@@ -1,0 +1,567 @@
+.edit_post {
+    position: absolute;
+    top: 16px;
+    right: 148px;;
+    display: inline-block;
+    margin-left: 18px;
+    padding: 5px 0 5px 5px;
+    box-sizing: content-box;
+    height: 20px;
+}
+
+.edit_post .ico_edit {
+    background-position: 0 -150px;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    margin-left: 5px;
+    float: left;
+}
+
+.btn_delete_post {
+    position: absolute;
+    top: 16px;
+    right: 108px;
+    display: inline-block;
+    padding: 5px 0 5px 5px;
+    box-sizing: content-box;
+    height: 20px;
+}
+
+.btn_delete_post .ico_delete {
+    background-position: -60px -150px;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    margin-left: 5px;
+    float: left;
+}
+
+.btn_like_post {
+    position: absolute;
+    top: 16px;
+    right: 108px;
+    display: inline-block;
+    padding: 5px 0 5px 5px;
+    box-sizing: content-box;
+    height: 20px;
+}
+
+.btn_like_post .ico_like {
+    background-position: 0 -90px;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    margin-left: 5px;
+    float: left;
+}
+
+.btn_like_post .ico_like_click {
+    background-position: -30px -89px;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    margin-left: 5px;
+    float: left;
+}
+
+.img_ico {
+    background: url(../images/layout/ico_view_cover.v4.png)
+}
+
+.text_hide {
+    overflow: hidden;
+    text-indent: -9999px;
+    line-height: 0;
+}
+
+
+.wrap_article .wrap_cover {
+    position: inherit;
+    width: 100%;
+    top: 0;
+    z-index: 0;
+}
+
+.cover_text {
+    height: 300px;
+    border-bottom: 1px solid #eee;
+    position: relative;
+}
+
+.cover_image {
+    display: block;
+    background-size: cover;
+    background-position: 50% 50%;
+    height: 400px;
+}
+
+.cover_inner {
+    display: block;
+    background-color: #333;
+    opacity: .3;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.cover_text .cover_direction_left {
+    text-align: left;
+    bottom: 0;
+    position: absolute;
+    width: 700px;
+    right: 50%;
+    transform: translate(50%, -96px);
+}
+
+.cover_direction_left .title {
+    font-family: "Noto Serif KR";
+    font-size: 34pt;
+    line-height: 40pt;
+    word-wrap: break-word;
+    margin-left: -2px;
+    margin-bottom: 0;
+    font-weight: 400;
+}
+
+.cover_direction_left .subtitle {
+    color: #666;
+    padding-top: 15px;
+    font-size: 12pt;
+    line-height: 18pt;
+    word-wrap: break-word;
+    margin: 0;
+}
+
+#wrapArticleInfo {
+    display: block;
+    position: absolute;
+    bottom: 50px;
+    width: 700px;
+    font-size: 12px;
+    transform: translate(50%, 1px);
+    right: 50%;
+}
+
+#wrapArticleInfo .f_l {
+    float: left;
+}
+
+#wrapArticleInfo .ico_by {
+    color: #666;
+    margin-right: 2px;
+    display: inline-block;
+    width: 15px;
+    height: 14px;
+    margin: 0 4px 0 0;
+    font-style: italic;
+}
+
+#wrapArticleInfo .text_author {
+    color: #666;
+}
+
+#wrapArticleInfo .ico_dot_middle {
+    background-color: #aaa;
+    margin: 8px 7px 0;
+    display: inline-block;
+    width: 2px;
+    height: 2px;
+    vertical-align: top;
+}
+
+#wrapArticleInfo .date {
+    color: #bbb;
+}
+
+/* title end */
+
+.wrap_body_frame {
+    padding-bottom: 5px;
+    position: relative;
+    background-color: #fff;
+}
+
+.wrap_body_frame .wrap_body {
+    margin-bottom: -5px;
+    overflow: hidden;
+    background: #fff;
+    position: relative;
+    /* padding-top: 40px; */
+}
+
+.wrap_body .wrap_content {
+    text-align: left;
+    margin-top: -7px;
+    font-size: 11pt;
+    /* line-height: 22pt; */
+    width: 700px;
+    min-width: 700px;
+    margin: 0 auto;
+    color: #333;
+}
+
+/* 댓글 버튼 */
+
+.inner_body_info {
+    text-align: right;
+    width: 700px;
+    margin: 0 auto 0 auto;
+}
+
+.wrap_comment_btn {
+    display: inline-block;
+}
+
+.wrap_comment_btn .btn_comment {
+    float: left;
+    margin-left: 8px;
+    padding: 10px 20px 8px 19px;
+    border: solid 1px #bbb;
+    font-size: 13px;
+    border-radius: 42px;
+    background-color: #fff;
+    font-family: 'Noto Sans KR';
+    color: #666;
+}
+
+.img_article {
+    display: inline-block;
+    overflow: hidden;
+    background: url(../images/layout/ico_article_181212_rtn.png) no-repeat;
+    background-size: 80px 80px;
+    vertical-align: top;
+}
+
+.wrap_comment_btn .ico_comment {
+    width: 20px;
+    height: 20px;
+    margin-right: 3px;
+    background-position: 0 0;
+}
+
+.wrap_comment_btn .num_comment {
+    color: #fec1a2;
+    font-family: 'Noto Sans KR';
+}
+
+.article_bottom {
+    padding-top: 82px;
+}
+
+/* 댓글 */
+
+#Comment {
+    display: none;
+}
+
+.user_comment {
+    padding-bottom: 142px;
+    background-color: #fff;
+    min-width: 1020px;  
+    position: relative;
+}
+
+.user_comment .comment_head {
+    margin: 0 auto 13px;
+    width: 700px;
+    height: 30px;
+}
+
+.user_comment .comment_head .tit_comment {
+    font-family: 'Noto Sans KR';
+    padding-top: 4px;
+    margin-left: -1px;
+    float: left;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.comment_head .tit_comment .txt_num {
+    padding-left: 5px;
+    color: #fec1a2;
+    font-family: 'Noto Sans KR';
+}
+
+.comment_content {
+    width: 700px;
+    margin: 0 auto;
+}
+
+/* .list_comment_more {
+    display: block;
+}
+
+.list_comment_more.none {
+    display: none;
+} */
+
+.cont_info {
+    width: 700px;
+    float: left;
+    position: relative;
+}
+
+.cont_info .info_append {
+    width: 100%;
+    font-size: 12px;
+    line-height: 14px;
+    font-family: "Noto Snas KR";
+    font-weight: 300;
+}
+
+.cont_info .info_append .tit_nickname {
+    float: left;
+}
+
+.cont_info .info_append .ico_dot {
+    color: #ddd;
+    float: left;
+    width: 2px;
+    height: 2px;
+    margin: 6px 4px 0;
+    background-color: #e4e4e4;
+    vertical-align: top;
+}
+
+.cont_info .info_append .txt_time {
+    color: #959595;
+    float: left;
+    font-size: 12px;
+    line-height: 14px;
+    font-family: "Noto Snas KR";
+    font-weight: 300;
+}
+
+.cont_info .info_append .txt_reply {
+    color: #333;
+    float: left;
+    line-height: 14px;
+    font-family: "Noto Snas KR";
+    font-weight: 300;
+}
+
+.cont_info .desc_comment {
+    padding: 9px 20px 0 0;
+    line-height: 22px;
+    font-family: "Noto Sans KR";
+    font-size: 14px;
+    word-wrap: break-word;
+    clear: left;
+    opacity: .8;
+    margin-bottom: 0;
+}
+
+.comment_content td {
+    padding: 25px 0 20px;
+    width: 700px;
+    float: left;
+    border-bottom: 1px solid #eee;
+}
+
+/* 댓글 작성 */
+
+fieldset {
+    border: 0 none;
+}
+
+.wrap_comment_write {
+    clear: both;
+}
+
+.comment_write {
+    padding-top: 20px;
+    position: relative;
+    width: 700px;
+    margin: 0 auto;
+}
+
+.comment_write .link_profile {
+    margin-left: 18px;
+    margin: 6px 0 0 10px;
+    overflow: visible;
+    float: left;
+    position: relative;
+    width: 42px;
+    height: 42px;
+    display: none;
+}
+
+.comment_write .link_profile .img_thumb {
+    display: block;
+    border-radius: 42px;
+    background-color: #fff;
+}
+
+.comment_write .box_area {
+    float: right;
+    position: relative;
+    width: 700px;
+    border: 1px solid #eee;
+    background-color: #fff;
+    margin-left: -10px;
+}
+
+
+.comment_write .tf_area {
+    padding: 15px 19px 0;
+    width: 590px;
+    min-height: 45px;
+    border: none;
+    line-height: 22px;
+    color: #666;
+    background: 0 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    outline: transparent dotted;
+    z-index: 1;
+    font-family: "Noto Sans KR";
+}
+
+.wrap_comment_write .tf_area_logout {
+    padding: 0 19px;
+
+}
+
+.comment_write .write_append {
+    height: 44px;
+    padding: 0 19px;
+}
+
+.comment_write .write_append .wrap_btn{
+    float: right;
+}
+
+.comment_write .write_append .btn_default {
+    width: 56px;
+    height: 30px;
+    margin-left: 5px;
+    border: 1px solid #bbb;
+    border-radius: 32px;
+    font-size: 12px;
+    line-height: 28px;
+    color: #666;
+}
+
+.comment_logout .box_area {
+    width: 698px;
+}
+
+.comment_logout .tf_area {
+    width: 660px;
+    display: block;
+    color: #959595;
+    margin-left: -115px;
+}
+
+.wrap_area_logout .a_tf_area_logout {
+    text-align: center;
+    display: inline-block;
+    padding: 17px 56px 0;
+    width: 590px;
+    min-height: 45px;
+    border: none;
+    line-height: 22px;
+    color: #666;
+    background: 0 0;
+    word-wrap: break-word;
+    outline: transparent dotted;
+    z-index: 1;
+    font-family: "Noto Sans KR";
+}
+
+/* 이전글 다음글 */
+
+.wrap_content_btn .page_btn {
+    margin-top: -100px;
+    position: absolute;
+    top: 50%;
+    width: 700px;
+    height: 100px;
+    display: block;
+}
+
+.wrap_content_btn .prev {
+    left: 30px;
+}
+
+.wrap_content_btn .next {
+    right: -570px;
+}
+
+.btn_icon {
+    background: url(../images/layout/ico_brunch_v8_181004_v2.png) no-repeat 0 0;
+    display: inline-block;
+    vertical-align: top;
+    width: 100px;
+    height: 101px;
+}
+
+.prev .btn_icon {
+    /* float: right; */
+    background-position: -167px -175px;
+}
+
+.next .btn_icon {
+    float: left;
+    background-position: -269px -175px;
+}
+
+/* 답글 */
+
+.thread_btn {
+    float: right;
+    position: relative;
+    padding: 0 17px;
+}
+
+
+.ico_arrow {
+    margin-top: 45px;
+    left: 610px;
+    position: absolute;
+    background: url(../images/layout/img_apply.png) no-repeat;
+    background-position: -408px -691px;
+    width: 133px;
+    height: 10px;
+    overflow: hidden;
+    display: inline-block;
+    background-size: 500px 750px;
+    opacity: .4;
+}
+
+.Tread_comment {
+    width: 56px;
+    height: 30px;
+    margin-left: 5px;
+    border: 1px solid #bbb;
+    border-radius: 32px;
+    font-size: 12px;
+    line-height: 2px;
+    color: #666
+}
+
+#T_comment .border_bottom {
+    width: 620px;
+    border-bottom: 1px solid #eee;
+    float: right;
+    position: relative;
+    background-color: #fff;
+    margin-left: -10px;
+}
+
+#T_comment .comment {
+    height: 30px;
+}
+
+#T_comment .comment_write .write_append {
+    height: 20px;
+    position: absolute;
+    right: -16px;
+    bottom: 20px;
+}
+
+#T_comment .tf_area {
+    width: 450px;
+}

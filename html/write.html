@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>미니 사진관</title>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500|Noto+Serif+KR:400,500|Nanum+Myeongjo:400,700|Nanum+Gothic:400,700|Lato:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/swiper.css">
+    <link rel="stylesheet" href="../css/write.css">
+    <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
+    <script src="../js/swiper.min.js"></script>
+    <script src="../js/TweenMax.min.js"></script>
+</head>
+<body>
+    <?php include '../include/header.php';?>
+    <div class="overlay"></div>
+    <main id="main" class="write">
+        <form action="../php/write.php" method="POST" name="write" onsubmit="return getContent()">
+            <div class="seditor">
+                <div class="wrap_editable">
+                    <button id="save" class="save" type="submit" name="save">저장</button>
+                    <div class="wrap_cover">
+                        <div class="cover_text">
+                            <div class="cover_image"></div>
+                            <div class="cover_inner">
+                                <div class="cover_background_color">
+                                    <div class="cover_color_selector"></div>
+                                </div>
+                            </div>
+                            <div class="cover_cell direction_left">
+                                <input id="title" class="cover_title" type="text" name="title" autocomplete="off" placeholder="제목을 입력하세요" >
+                                <input id="subtitle" class="cover_sub_title" type="text" name="subtitle" autocomplete="off" placeholder="소제목을 입력하세요" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="textarea_con">
+                        <div class="con_img">
+                            <div id="dropzone" class="dropzone">
+                                <div id="dragtext" class="dragtext">사진을 드래그 앤 드롭을 해 주세요</div>
+                                <div id="div_content" contenteditable="true" class="wrap_body wrap_type_text">
+                                    <div><br></div>
+                                    <div id="thumbnails"></div>
+                                </div>
+                                <textarea id="content" style="display:none" name="content"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="side_bttn_wrapper">
+                <div class="side_bttn_bg"></div>
+                <div id="side_bttn_inner" class="side_bttn_inner">
+                    <button class="be_button" type="button" title="글꼴">
+                        <i class="be_icon be_icon_font"></i>
+                    </button>
+                    <select id="fontName" class="sidebar_popup_line" width="50px">
+                        <option value="Noto Sans KR">본고딕</option>
+                        <option value="Noto Serif KR">본명조</option>
+                        <option value="Lato">Lato</option>
+                    </select>
+                    <div id="align_btn" class="align_btn">
+                        <button id="justifyLeft" class="be_button" type="button" title="정렬" style="display: none;">
+                            <i id="be_icon_left" class="be_icon be_icon_align"></i>
+                        </button>
+                        <button id="justifyCenter" class="be_button" type="button" title="정렬" style="display: block;">
+                            <i id="be_icon_center" class="be_icon be_icon_align"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+   <script src="../js/header.js"></script>
+   <script src="../js/write.js"></script>
+   <script>
+        function getContent(){
+            document.getElementById("content").value = document.getElementById("div_content").innerHTML;
+        }
+
+        $(document).ready(function(){
+
+            var uploadFiles = [];
+
+            $(".dropzone").on("dragover",function(){
+                $(this).addClass("dragover");
+                $(".dragtext").addClass("dragover");
+                return false;
+            });
+
+            $(".dropzone").on("dragleave", function(){
+                $(this).removeClass("dragover");
+                $(".dragtext").removeClass("dragover");
+                return false;
+            });
+
+            $(".dropzone").on("drop", function(e){
+                e.preventDefault();
+                $(".dragtext").removeClass("dragover");              
+                var formData = new FormData();
+
+                var files = e.originalEvent.dataTransfer.files;
+
+                for(var i = 0; i < files.length; i++) {
+                    var file = files[i];
+                    var size = uploadFiles.push(files);
+                    preview(file, size - 1); 
+                }
+
+                function preview(file, idx) {
+                    var reader = new FileReader();
+                    reader.onload = (function(f, idx) {
+                            return function(e) {
+                                var div = 
+                                '<div id="thumb" class="thumb">'+
+                                    '<div class="close" data-idx="' + idx + '" contenteditable="false"></div>'+
+                                    '<div id="image_contents"></div>'
+                                '</div>';
+                            $("#thumbnails").append(div);};
+                        })(file, idx);
+                    reader.readAsDataURL(file);
+                }
+
+                for(var i=0; i<files.length; i++) {
+                    
+                    formData.append("file[]",files[i]);
+                }
+
+                $.ajax({
+                    url: "../php/condragdrop.php",
+                    method: "POST",
+                    data: formData,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success:function(data) {
+                        $("#image_contents").html(data);
+                    }
+                })
+            });
+
+            $("#thumbnails").on("click", ".close", function(e) {
+                var $target = $(e.target);
+                var idx = $target.attr('data-idx');
+                uploadFiles[idx].upload = 'disable'; //삭제된 항목은 업로드하지 않기 위해 플래그 생성
+                $target.parent().remove(); //프리뷰 삭제
+            });
+            
+        });
+        
+        var currentPosition = parseInt($("#side_bttn_inner").css("top")); 
+        
+        $(window).scroll(function() { 
+            var position = $(window).scrollTop(); $("#side_bttn_inner").stop().animate({"top":position+currentPosition+"px"},1000); 
+        });
+
+   </script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>미니 사진관</title>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500|Noto+Serif+KR:400,500 | Lato:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/swiper.css">
+    <link rel="stylesheet" href="../css/list.css">
+    <script src="https://code.jquery.com/jquery-3.4.0.js"></script>
+    <script src="../js/swiper.min.js"></script>
+    <script src="../js/TweenMax.min.js"></script>
+</head>
+<body>
+    <?php include '../include/header.php';?>
+    <?php
+        $connect = mysqli_connect('127.0.0.1', 'project', 'bitnami', 'project') or die ("connect fail");
+        $query = "select * from Post order by post_id desc";
+        $result = $connect->query($query);
+        $total = mysqli_num_rows($result);
+    ?>
+    <div class="overlay"></div>
+    <div class="wrap_custom_piclist">
+        <button id="btn_piclist_list" class="btn_piclist_list active" data-status="#list">나의 글</button>
+        <button id="btn_piclist_collect" class="btn_piclist_collect" data-status="#collect">좋아요 글</button>
+    </div>
+    <main id="main" class="piclist_con">
+        <!-- 나의 글 보기 -->
+        <div id="mypic" class="wrapPiclist">
+            <div id="wrapPiclist_l" class="wraplist">
+                <h4 class="screen_out">사진 저장목록</h4>
+                <div class="wrap_pic_list">
+                <table>
+                    <tbody>
+<?php
+                    while($rows = mysqli_fetch_assoc($result)) {
+                        if ($_SESSION['userid'] == $rows['userid']){
+                            if($total%2==0){
+?>
+                                <tr class="wrap_pic_empty"></tr >
+<?php                       }
+                            else{
+?>
+                                <tr class="list_pic">
+<?php                       }
+?>                                  <td class="animation_up">
+                                        <a href="view.html?post_id=<?php echo $rows['post_id']?>" class="link_post">
+                                            <div class="post_title">
+                                                <strong class="title_subject"><?php echo $rows['title']?></strong>
+                                                <div class="wrap_sub_content my_content">
+                                                    <em class="subtitle"><?php echo $rows['subtitle']?></em>
+                                                    <span class="pic_content"><?php echo $rows['content']?></span>
+                                                </div>
+                                                <div class="post_time">
+                                                    <span class="publish_time"><?php echo $rows['date']?></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </td >
+                                </tr>
+<?php
+                            $total--;
+                        }
+                    }
+?>    
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- 좋아요 글 보기 -->
+        <?php
+            $connect = mysqli_connect('127.0.0.1', 'project', 'bitnami', 'project') or die ("connect fail");
+            $query3 = "select * from Post order by post_id desc";
+            $result3 = $connect->query($query3);
+            $total3 = mysqli_num_rows($result3);
+
+            $userid1 = $_SESSION['userid'];
+            $query4 = "select * from LikePost where userid = '$userid1'";
+            $result4 = $connect->query($query4);
+            $rows4 = mysqli_fetch_assoc($result4);
+            $total4 = mysqli_num_rows($result4);
+        ?>
+        <div id="lickpic" class="wrapPiclist">
+            <div id="wrapPiclist_l" class="wraplist">
+                <h4 class="screen_out">사진 저장목록</h4>
+                <div class="wrap_pic_list">
+                <table>
+                    <tbody>
+<?php
+                    while($rows3 = mysqli_fetch_assoc($result3)) {
+                        if($rows4['post_id'] == $rows3['post_id']) {
+                            if($total3%2==0){
+?>
+                                <tr class="wrap_pic_empty"></tr>
+<?php                           }
+                            else{
+?>
+                                <tr class="list_pic">
+<?php                           }
+?>                                  
+                                <?php
+                                    $connect = mysqli_connect('127.0.0.1', 'project', 'bitnami', 'project') or die ("connect fail");
+                                    $userid = $rows3['userid'];
+                                    $query2 ="select nickname, address from UserInfo where userid = '$userid'";
+                                    $result2 = $connect->query($query2);
+                                    $total2 = mysqli_num_rows($result2);
+                                    $rows2 = mysqli_fetch_assoc($result2);
+                                ?>
+                                    <td class="animation_up">
+                                        <a href="view.html?post_id=<?php echo $rows3['post_id']?>" class="link_post">
+                                            <div class="post_title">
+                                                <strong class="title_subject"><?php echo $rows3['title']?></strong>
+                                                <div class="wrap_sub_content">
+                                                    <em class="subtitle"><?php echo $rows3['subtitle']?></em>
+                                                    <span id="pic_content" class="pic_content"><?php echo $rows3['content']?></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="append_common">
+                                            <span class="ico_by">by</span>
+                                            <a href="m_studio.html?address=<?php echo $rows2['address']?>" class="link_bloger"><?php echo $rows2['nickname']?></a>
+                                            <span class="ico_dot"></span>
+                                            <span class="publish_time"><?php echo $rows3['date']?></span>
+                                        </div>
+                                    </td >
+                                </tr>
+<?php
+                                $total3--;
+                            }
+                        }
+?>    
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="../js/header.js"></script>
+    <script>
+        var mypic = document.getElementById("mypic");
+        var lickpic = document.getElementById("lickpic");
+
+        $(".btn_piclist_list").on("click",function(){
+            mypic.style.display = "block";
+            lickpic.style.display = "none";
+            $(".btn_piclist_list").addClass("active");
+            $(".btn_piclist_collect").removeClass("active");
+            return false;
+        });
+        $(".btn_piclist_collect").on("click",function(){
+            mypic.style.display = "none";
+            lickpic.style.display = "block";
+            $(".btn_piclist_collect").addClass("active");
+            $(".btn_piclist_list").removeClass("active");
+            return false;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+
+/* 글쓰기 부분 */
+
+#writeData {
+    margin-top: 70px;
+}
+
+.table_write {
+    margin-top: 10px;
+}
+
+.table_write th {
+    padding: 6px 0;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    color: #9d9d9d;
+    font-size: 13px;
+    width: 90px;
+}
+
+.table_write td {
+    padding: 6px 0;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    color: #9d9d9d;
+    font-size: 13px;
+}
+
+.table_write .input_style {
+    width: 174px;
+}
+
+.table_write .input_text {
+    padding: 10px 0 10px 5px;
+    line-height: 17px;
+    border: 1px solid #dcdcdc;
+    color: #777;
+}
+
+.table_write #title {
+    width: 700px;
+}
+
+textarea {
+    width: 90%;
+    height: 400px;
+}
+
+/* 버튼 */
+
+#writeData .botton {
+    margin-top: 10px;
+    text-align: right;
+}
+
+.buttonPro {
+    margin: 0 3px;
+    vertical-align: middle;
+    padding: 15px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #555;
+    border: 1px solid #ccc;
+    font-weight: 500;
+}
