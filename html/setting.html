@@ -179,18 +179,6 @@
                     formData.append("file[]",files_list[i]);
                 }
 
-                // for (var key of formData.keys()) {
-
-                //     console.log(key);
-
-                //     }
-
-                //     for (var value of formData.values()) {
-
-                //     console.log(value);
-
-                //     }
-
                 $.ajax({
                     url: "../php/dragdrop.php",
                     method: "POST",
