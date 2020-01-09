@@ -71,7 +71,6 @@ tbody {
 #Visual tr {
     width: 316.5px;
     height: 520px;
-    /* background-color: #333; */
     position: relative;
 }
 
@@ -122,14 +121,6 @@ tbody {
     transform:scale(1.2);
     overflow: hidden;
 }
-
-/* .animation_up .back_image .link_item {
-    display: block;
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
-    transition:all 0.25s;
-} */
 
 .animation_up .back_image {
     width: 100%;
