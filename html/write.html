@@ -152,7 +152,8 @@
         var currentPosition = parseInt($("#side_bttn_inner").css("top")); 
         
         $(window).scroll(function() { 
-            var position = $(window).scrollTop(); $("#side_bttn_inner").stop().animate({"top":position+currentPosition+"px"},1000); 
+            var position = $(window).scrollTop(); 
+            $("#side_bttn_inner").stop().animate({"top":position+currentPosition+"px"},1000); 
         });
 
    </script>
